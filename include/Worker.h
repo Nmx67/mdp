@@ -18,7 +18,8 @@ public:
     void exec(
         const std::string &address,
         const std::string &serviceName,
-        WorkerTask::Transform);
+        WorkerTask::Transform
+    );
 private:
     MutualHeartbeatMonitor monitor_;
 

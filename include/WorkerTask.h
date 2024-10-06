@@ -10,7 +10,7 @@ struct WorkerTask
     struct Guard
     {
         zmqpp::socket &socket_;
-        Guard(zmqpp::socket &socket): socket_{socket}
+        Guard(zmqpp::socket &socket) : socket_{socket}
         {}
     };
 
@@ -30,9 +30,11 @@ struct WorkerTask
 
     Transform transform_;
 
-    WorkerTask(Transform transform):
-        transform_{std::move(transform)}
+    WorkerTask(Transform transform)
+       : transform_{std::move(transform)}
     {}
 
+
+    // read incoming task request and transform it
     void operator()(zmqpp::socket &);
 };

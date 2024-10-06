@@ -1,4 +1,4 @@
-#include "Ensure.h"
+// #include "Ensure.h"
 #include "Except.h"
 #include "ZMQWorkerContext.h"
 
@@ -7,8 +7,8 @@ ZMQWorkerContext::ZMQWorkerContext(ZMQIdentity identity, std::string address):
     socket_{context_, zmqpp::socket_type::dealer},
     masterSocket_{context_, zmqpp::socket_type::dealer},
     slaveSocket_{context_, zmqpp::socket_type::dealer},
-    identity_{std::move(identity)},
-    address_{std::move(address)}
+    identity_{identity},
+    address_{address}
 {
     ENSURE(context_, RuntimeError);
     ENSURE(!address_.empty(), RuntimeError);

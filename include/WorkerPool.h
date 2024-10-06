@@ -6,11 +6,10 @@
 #include <vector>
 #include <ostream>
 
-#include "Ensure.h"
+// #include "Ensure.h"
 #include "Except.h"
 #include "MutualHeartbeatMonitor.h"
 #include "ZMQIdentity.h"
-
 
 struct WorkerPool
 {
@@ -67,17 +66,17 @@ public:
     template <typename F>
     void forEachWorker(F f)
     {
-        for(auto &pair : serviceMap_)
-        {
+        for(auto &pair : serviceMap_) {
             for(auto &worker : pair.second) f(worker);
         }
     }
 
     bool valid(const ServiceName &serviceName) const
     {
-        return
-            0 < serviceMap_.count(serviceName)
-            && !serviceMap_.at(serviceName).empty();
+        return(
+               0 < serviceMap_.count(serviceName)
+            && !serviceMap_.at(serviceName).empty()
+         );
     }
 
     Worker *acquire(const ServiceName &serviceName)
@@ -89,12 +88,12 @@ public:
         if(Worker::State::Idle != workerSeq.front().state_) return nullptr;
 
         /* round robin (if more then 1 worker in sequence) */
-        if(std::end(workerSeq) != std::next(std::begin(workerSeq)))
-        {
+        if(std::end(workerSeq) != std::next(std::begin(workerSeq))) {
             std::rotate(
                 std::begin(workerSeq),
                 std::next(std::begin(workerSeq)),
-                std::end(workerSeq));
+                std::end(workerSeq)
+            );
         }
 
         return &workerSeq.back();

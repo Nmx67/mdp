@@ -2,7 +2,7 @@
 
 #include <zmqpp/zmqpp.hpp>
 
-#include "Ensure.h"
+// #include "Ensure.h"
 #include "Except.h"
 
 
